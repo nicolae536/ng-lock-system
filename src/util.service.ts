@@ -55,7 +55,7 @@ export class UtilService {
     }
 
     isSubscription(subs: any): boolean {
-        return subs && subs.unsubscribe;
+        return subs && subs.unsubscribe && this.isInstanceOf(Subscription, subs);
     }
 
     isObject(subs: any): boolean {
