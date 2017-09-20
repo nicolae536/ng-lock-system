@@ -5,22 +5,24 @@
         "stripInternal": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "module": "es2015",
+        "module": "commonjs",
         "moduleResolution": "node",
         "noEmitOnError": false,
         "outDir": "./release",
         "rootDir": ".",
-        "sourceMap": true,
-        "inlineSources": true,
         "lib": [
             "es2015",
             "dom"
         ],
         "target": "es5",
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "types": [
+            "node",
+            "jasmine"
+        ]
     },
-    "files": [
-        "index.ts"
+    "exclude": [
+        "node_modules"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true

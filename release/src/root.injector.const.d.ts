@@ -1,5 +1,4 @@
 import { Injector } from "@angular/core";
-
-export class RootServiceLocator {
+export declare class RootServiceLocator {
     static injector: Injector;
 }
