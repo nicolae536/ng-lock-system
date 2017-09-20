@@ -58,7 +58,6 @@ typings/
 .env
 
 # Release
-
-**/release/**.*
-**.idea/**
+**/release/*
+**/.idea/*
 
