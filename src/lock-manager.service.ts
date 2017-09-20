@@ -24,15 +24,15 @@ export class LockManagerService implements OnDestroy {
      * @param {string} componentId
      * @param {boolean} lockManager if passed with true this will mark the manager as locked
      */
-    lockManager(componentId?: string, lockManager: boolean = false) {
+    lockComponent(componentId?: string, lockManager: boolean = false) {
         this.dispatchStatus(LOCK_STATUS.LOCKED, componentId, lockManager);
     }
 
     /**
-     * @desc  sets the componentId as unlocked inside the _managerLock$ observable we automatically mark the lockManager as false
+     * @desc  sets the componentId as unlocked inside the _managerLock$ observable we automatically mark the lockComponent as false
      * @param {string} componentId
      */
-    unlockManager(componentId?: string) {
+    unlockComponent(componentId?: string) {
         this.dispatchStatus(LOCK_STATUS.UNLOCKED, componentId, false);
     }
 

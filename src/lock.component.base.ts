@@ -24,6 +24,10 @@ export class NgLockComponentBase {
     setComponentId(componentId: string) {
         this._componentId = componentId;
         this.isLocked$ = this._lockManager.listenTo(this._componentId);
+
+        if (this._lockSubscription) {
+            this.unWrapLockSubscription();
+        }
     }
 
     unWrapLockSubscription() {
@@ -44,8 +48,8 @@ export class NgLockComponentBase {
 
     busy(value: boolean = true, managerBusy: boolean = false) {
         value
-            ? this._lockManager.lockManager(this._componentId, managerBusy)
-            : this._lockManager.unlockManager(this._componentId);
+            ? this._lockManager.lockComponent(this._componentId, managerBusy)
+            : this._lockManager.unlockComponent(this._componentId);
     }
 
     addSubscription(s: Subscription) {
