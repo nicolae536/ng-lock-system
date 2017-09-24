@@ -50,14 +50,14 @@ module.exports = function (karma) {
             },
             module: {
                 loaders: [
-                    {
-                        enforce: 'pre',
-                        test: /\.ts$/,
-                        loader: 'tslint-loader',
-                        exclude: [
-                            /node_modules/
-                        ]
-                    },
+                    // {
+                    //     enforce: 'pre',
+                    //     test: /\.ts$/,
+                    //     loader: 'tslint-loader',
+                    //     exclude: [
+                    //         /node_modules/
+                    //     ]
+                    // },
                     {
                         test: /\.ts?$/,
                         exclude: /(node_modules)/,

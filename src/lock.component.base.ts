@@ -5,9 +5,9 @@ import { UtilService } from "./util.service";
 import { RootServiceLocator } from "./root.injector.const";
 
 export class NgLockComponentBase {
-    protected util: UtilService = null;
-    protected isLocked$: Observable<boolean> = null;
-    protected isLocked: boolean = false;
+    public util: UtilService = null;
+    public isLocked$: Observable<boolean> = null;
+    public isLocked: boolean = false;
 
     private _componentId: string = "";
     private _lockManager: LockManagerService = null;

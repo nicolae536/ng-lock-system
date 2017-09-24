@@ -1,17 +1,8 @@
 import { NgModule, Component } from '@angular/core';
-import { platformDynamicServer } from '@angular/platform-server';
 import { BrowserModule } from '@angular/platform-browser';
-import { counterReducer, INCREMENT, DECREMENT } from '../fixtures/counter';
-import { Observable } from 'rxjs/Observable';
-import { NgLockSystemModule } from "../../src/ng-lock-system.module";
 import { NgLockComponentBase } from "../../src/lock.component.base";
+import { NgLockSystemModule } from "../../src/ng-lock-system.module";
 
-export interface AppState {
-    count: number;
-}
-
-export const storeConfig = {count: counterReducer};
-export const initialState = {count: 0};
 
 @Component({
     selector: 'ngc-spec-component',
