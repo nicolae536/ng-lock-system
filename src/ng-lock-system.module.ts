@@ -9,7 +9,7 @@ export function provideLockSystem(enableLogging) {
     return [
         UtilService,
         LockManagerService,
-        {provide: ENABLE_LOGGING, useValue: enableLogging}
+        {provide: ENABLE_LOGGING, useValue: enableLogging || false}
     ];
 }
 
@@ -19,7 +19,7 @@ export class NgLockSystemModule {
         RootServiceLocator.injector = appInjector;
     }
 
-    provideLockSystem(enableLogging: boolean = false) {
+    static provideLockSystem(enableLogging: boolean = false) {
         return {
             ngModule: NgLockSystemModule,
             providers: provideLockSystem(enableLogging)

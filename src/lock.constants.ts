@@ -1,5 +1,3 @@
-import { OpaqueToken } from "@angular/core";
-
 export interface Dictionary<T> {
     [index: string]: T;
 }

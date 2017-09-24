@@ -58,6 +58,10 @@ export class UtilService {
         return subs && subs.unsubscribe && this.isInstanceOf(Subscription, subs);
     }
 
+    isFunction(f: any): boolean {
+        return this.isInstanceOf(Function, f);
+    }
+
     isObject(subs: any): boolean {
         return this.isInstanceOf(Object, subs);
     }

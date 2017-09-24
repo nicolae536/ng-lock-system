@@ -1,12 +1,12 @@
 import { Injectable, OnDestroy, Inject } from "@angular/core";
+import "rxjs/add/operator/debounceTime";
+import "rxjs/add/operator/map";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import { Subscription } from "rxjs/Subscription";
 import { LOCK_STATUS, ComponentsLockMap } from "./lock.constants";
-import { UtilService } from "./util.service";
 import { ENABLE_LOGGING } from "./ng-lock-system.module";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/debounceTime";
+import { UtilService } from "./util.service";
 
 @Injectable()
 export class LockManagerService implements OnDestroy {

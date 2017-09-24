@@ -1,6 +1,5 @@
 import { Observable } from "rxjs/Observable";
 import { Subscription } from "rxjs/Subscription";
-import { AfterOnDestroy } from "./decorators";
 import { LockManagerService } from "./lock-manager.service";
 import { UtilService } from "./util.service";
 import { RootServiceLocator } from "./root.injector.const";
@@ -19,6 +18,7 @@ export class NgLockComponentBase {
         this.util = RootServiceLocator.injector.get(UtilService);
         this._lockManager = RootServiceLocator.injector.get(LockManagerService);
         this.setComponentId(this.util.getId());
+        this.setNgOnDestroyHook();
     }
 
     setComponentId(componentId: string) {
@@ -56,10 +56,22 @@ export class NgLockComponentBase {
         this._subscriptions.push(s);
     }
 
-    @AfterOnDestroy()
     cleanupData() {
         this._lockManager.unListen(this._lockSubscription);
         this._lockManager.removeComponent(this._componentId);
         this._lockManager.unListen(this._subscriptions);
+    }
+
+    private setNgOnDestroyHook() {
+        let old = () => {
+        };
+        if (this.util.isFunction(this["ngOnDestroy"])) {
+            old = this["ngOnDestroy"].bind(this);
+        }
+
+        this["ngOnDestroy"] = () => {
+            old();
+            this.cleanupData();
+        }
     }
 }

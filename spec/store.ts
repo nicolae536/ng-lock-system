@@ -24,7 +24,7 @@
 describe('ngRx Store', () => {
 
   describe('basic store actions', function() {
-      expect(true).toBe(true);
+      // expect(true).toBe(true);
     // let injector: ReflectiveInjector;
     // let store: Store<TestAppSchema>;
     // let dispatcher: Dispatcher;

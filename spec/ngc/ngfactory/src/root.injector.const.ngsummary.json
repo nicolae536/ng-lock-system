@@ -1,0 +1,1 @@
+{"summaries":[{"symbol":{"__symbol":0},"metadata":{"__symbolic":"class","statics":{"injector":{"__symbolic":"error","message":"Variable not initialized","line":3,"character":11}}}}],"symbols":[{"__symbol":0,"name":"RootServiceLocator","filePath":"D:/Workspace/JS_TS/ng-lock-system/src/root.injector.const.d.ts"}]}
