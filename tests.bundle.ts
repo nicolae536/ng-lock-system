@@ -7,7 +7,7 @@ import "zone.js/dist/fake-async-test";
 import "zone.js/dist/sync-test";
 import "zone.js/dist/proxy";
 import "zone.js/dist/jasmine-patch";
-// import "./spec/helpers/test-helper";
+import "./spec/helpers/test-helper";
 
 // Unfortunately there"s no typing for the `__karma__` variable. Just declare it as any.
 declare var __karma__: any;

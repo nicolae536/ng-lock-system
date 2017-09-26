@@ -19,7 +19,7 @@ var NgLockComponentBase = /** @class */ (function () {
     }
     NgLockComponentBase.prototype.setComponentId = function (componentId) {
         this._componentId = componentId;
-        this.isLocked$ = this._lockManager.listenTo(this._componentId);
+        this.isLocked$ = this._lockManager.listenTo(this._componentId).debounceTime(0);
         if (this._lockSubscription) {
             this.unWrapLockSubscription();
         }

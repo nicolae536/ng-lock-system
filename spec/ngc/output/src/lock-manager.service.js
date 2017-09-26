@@ -66,10 +66,8 @@ var LockManagerService = /** @class */ (function () {
         return arrayStatus.length === 0
             ? this._managerLock$
                 .map(function (managerMap) { return _this.getManagerLockedState(managerMap); })
-                .debounceTime(0)
             : this._managerLock$
-                .map(function (managerMap) { return _this.getManagerLockedSubspace(managerMap, arrayStatus); })
-                .debounceTime(0);
+                .map(function (managerMap) { return _this.getManagerLockedSubspace(managerMap, arrayStatus); });
     };
     /**
      * @desc if we use subscribe on a listenTo returned observable we need to unsubscribe it

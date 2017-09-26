@@ -50,10 +50,8 @@ export class LockManagerService implements OnDestroy {
         return arrayStatus.length === 0
             ? this._managerLock$
                 .map(managerMap => this.getManagerLockedState(managerMap))
-                .debounceTime(0)
             : this._managerLock$
-                .map(managerMap => this.getManagerLockedSubspace(managerMap, arrayStatus))
-                .debounceTime(0);
+                .map(managerMap => this.getManagerLockedSubspace(managerMap, arrayStatus));
     }
 
     /**
