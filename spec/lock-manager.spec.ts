@@ -56,5 +56,36 @@ describe('ngLockSystem Lock manager service', () => {
             expectObservable(cmpSelector)
                 .toBe(stateSequence, expectedValuesOnCmpStates);
         });
+
+        it('should lock and unlock different components maintaining the full manager state', () => {
+            let emitSequence = hot("--a--b--c--d--e--f", {
+                a: {value: true, cmdId: "CMP_1", lockFullApp: true},
+                b: {value: true, cmdId: "CMP_2"},
+                c: {value: false, cmdId: "CMP_1"},
+                d: {value: true, cmdId: "CMP_2", lockFullApp: true},
+                e: {value: false, cmdId: "CMP_2"},
+                f: {value: true, cmdId: "CMP_1"}
+            });
+            emitSequence.subscribe((action) => {
+                action.value
+                    ? lockManager.lockComponent(action.cmdId, action.lockFullApp)
+                    : lockManager.unlockComponent(action.cmdId)
+
+            });
+            const stateSequence = 'x-a--b--c--d--e--f';
+            const managerSelector = lockManager.listenTo();
+            const expectedValuesOnManagerStates = {x: false, a: true, b: true, c: false, d: true, e: false, f: false};
+            const cmp1Selector = lockManager.listenTo("CMP_1");
+            const cmp2Selector = lockManager.listenTo("CMP_2");
+            const expectedValuesOnCmp1States = {x: false, a: true, b: true, c: false, d: false, e: false, f: true};
+            const expectedValuesOnCmp2States = {x: false, a: false, b: true, c: true, d: true, e: false, f: false};
+
+            expectObservable(managerSelector)
+                .toBe(stateSequence, expectedValuesOnManagerStates);
+            expectObservable(cmp1Selector)
+                .toBe(stateSequence, expectedValuesOnCmp1States);
+            expectObservable(cmp2Selector)
+                .toBe(stateSequence, expectedValuesOnCmp2States);
+        });
     });
 });

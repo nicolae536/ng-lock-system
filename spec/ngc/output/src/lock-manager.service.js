@@ -119,7 +119,7 @@ var LockManagerService = /** @class */ (function () {
         if (!this._util.isObject(managerMap)) {
             return false;
         }
-        for (var cmpId in managerMap.components) {
+        for (var cmpId in managerMap) {
             if (managerMap[cmpId] &&
                 managerMap[cmpId].lockManager &&
                 managerMap[cmpId].status === lock_constants_1.LOCK_STATUS.LOCKED) {
