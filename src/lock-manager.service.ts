@@ -112,7 +112,7 @@ export class LockManagerService implements OnDestroy {
             return false;
         }
 
-        for (const cmpId in managerMap.components) {
+        for (const cmpId in managerMap) {
             if (managerMap[cmpId] &&
                 managerMap[cmpId].lockManager &&
                 managerMap[cmpId].status === LOCK_STATUS.LOCKED) {
