@@ -8,22 +8,22 @@ export class NgLockComponentBase {
     public util: UtilService = null;
     public isLocked$: Observable<boolean> = null;
     public isLocked: boolean = false;
+    public lockManager: LockManagerService = null;
 
     private _componentId: string = "";
-    private _lockManager: LockManagerService = null;
     private _lockSubscription: Subscription = null;
     private _subscriptions: Subscription[] = [];
 
     constructor() {
         this.util = RootServiceLocator.injector.get(UtilService);
-        this._lockManager = RootServiceLocator.injector.get(LockManagerService);
+        this.lockManager = RootServiceLocator.injector.get(LockManagerService);
         this.setComponentId(this.util.getId());
         this.setNgOnDestroyHook();
     }
 
     setComponentId(componentId: string) {
         this._componentId = componentId;
-        this.isLocked$ = this._lockManager.listenTo(this._componentId).debounceTime(0);
+        this.isLocked$ = this.lockManager.listenTo(this._componentId).debounceTime(0);
 
         if (this._lockSubscription) {
             this.unWrapLockSubscription();
@@ -32,7 +32,7 @@ export class NgLockComponentBase {
 
     unWrapLockSubscription() {
         if (this._lockSubscription) {
-            this._lockManager.unListen(this._lockSubscription);
+            this.lockManager.unListen(this._lockSubscription);
         }
 
         if (!this.isLocked$ || !this.isLocked$.subscribe) {
@@ -48,8 +48,8 @@ export class NgLockComponentBase {
 
     busy(value: boolean = true, managerBusy: boolean = false) {
         value
-            ? this._lockManager.lockComponent(this._componentId, managerBusy)
-            : this._lockManager.unlockComponent(this._componentId);
+            ? this.lockManager.lockComponent(this._componentId, managerBusy)
+            : this.lockManager.unlockComponent(this._componentId);
     }
 
     addSubscription(s: Subscription) {
@@ -57,9 +57,9 @@ export class NgLockComponentBase {
     }
 
     cleanupData() {
-        this._lockManager.unListen(this._lockSubscription);
-        this._lockManager.removeComponent(this._componentId);
-        this._lockManager.unListen(this._subscriptions);
+        this.lockManager.unListen(this._lockSubscription);
+        this.lockManager.removeComponent(this._componentId);
+        this.lockManager.unListen(this._subscriptions);
     }
 
     private setNgOnDestroyHook() {

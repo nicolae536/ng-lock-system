@@ -19,6 +19,10 @@ export class LockManagerService implements OnDestroy {
         }
     }
 
+    let(): BehaviorSubject<ComponentsLockMap> {
+        return this._managerLock$;
+    }
+
     /**
      * @desc  sets the componentId as locked inside the _managerLock$ observable
      * @param {string} componentId

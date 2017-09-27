@@ -9,17 +9,17 @@ var NgLockComponentBase = /** @class */ (function () {
         this.isLocked$ = null;
         this.isLocked = false;
         this._componentId = "";
-        this._lockManager = null;
+        this.lockManager = null;
         this._lockSubscription = null;
         this._subscriptions = [];
         this.util = root_injector_const_1.RootServiceLocator.injector.get(util_service_1.UtilService);
-        this._lockManager = root_injector_const_1.RootServiceLocator.injector.get(lock_manager_service_1.LockManagerService);
+        this.lockManager = root_injector_const_1.RootServiceLocator.injector.get(lock_manager_service_1.LockManagerService);
         this.setComponentId(this.util.getId());
         this.setNgOnDestroyHook();
     }
     NgLockComponentBase.prototype.setComponentId = function (componentId) {
         this._componentId = componentId;
-        this.isLocked$ = this._lockManager.listenTo(this._componentId).debounceTime(0);
+        this.isLocked$ = this.lockManager.listenTo(this._componentId).debounceTime(0);
         if (this._lockSubscription) {
             this.unWrapLockSubscription();
         }
@@ -27,7 +27,7 @@ var NgLockComponentBase = /** @class */ (function () {
     NgLockComponentBase.prototype.unWrapLockSubscription = function () {
         var _this = this;
         if (this._lockSubscription) {
-            this._lockManager.unListen(this._lockSubscription);
+            this.lockManager.unListen(this._lockSubscription);
         }
         if (!this.isLocked$ || !this.isLocked$.subscribe) {
             return;
@@ -42,16 +42,16 @@ var NgLockComponentBase = /** @class */ (function () {
         if (value === void 0) { value = true; }
         if (managerBusy === void 0) { managerBusy = false; }
         value
-            ? this._lockManager.lockComponent(this._componentId, managerBusy)
-            : this._lockManager.unlockComponent(this._componentId);
+            ? this.lockManager.lockComponent(this._componentId, managerBusy)
+            : this.lockManager.unlockComponent(this._componentId);
     };
     NgLockComponentBase.prototype.addSubscription = function (s) {
         this._subscriptions.push(s);
     };
     NgLockComponentBase.prototype.cleanupData = function () {
-        this._lockManager.unListen(this._lockSubscription);
-        this._lockManager.removeComponent(this._componentId);
-        this._lockManager.unListen(this._subscriptions);
+        this.lockManager.unListen(this._lockSubscription);
+        this.lockManager.removeComponent(this._componentId);
+        this.lockManager.unListen(this._subscriptions);
     };
     NgLockComponentBase.prototype.setNgOnDestroyHook = function () {
         var _this = this;

@@ -87,5 +87,27 @@ describe('ngLockSystem Lock manager service', () => {
             expectObservable(cmp2Selector)
                 .toBe(stateSequence, expectedValuesOnCmp2States);
         });
+
+        it('should unlock resources when a component wants to unListen to the manager lock states', () => {
+            const managerSelector = lockManager.listenTo();
+            const cmp1Selector = lockManager.listenTo("CMP_1");
+            const cmp2Selector = lockManager.listenTo("CMP_2");
+
+            let firstSubscription = managerSelector.subscribe(v => {
+            });
+            let secondSubscription = cmp1Selector.subscribe(v => {
+            });
+            let thirdSubscription = cmp2Selector.subscribe(v => {
+            });
+
+            expect(lockManager.let().observers.length).toBe(3);
+            lockManager.unListen(firstSubscription);
+            expect(lockManager.let().observers.length).toBe(2);
+            lockManager.unListen(thirdSubscription);
+            expect(lockManager.let().observers.length).toBe(1);
+            lockManager.unListen(secondSubscription);
+            expect(lockManager.let().observers.length).toBe(0);
+            expect(lockManager.let().isStopped).toBe(false);
+        })
     });
 });

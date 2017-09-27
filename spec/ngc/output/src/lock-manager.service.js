@@ -35,6 +35,9 @@ var LockManagerService = /** @class */ (function () {
             this.startLogging();
         }
     }
+    LockManagerService.prototype.let = function () {
+        return this._managerLock$;
+    };
     /**
      * @desc  sets the componentId as locked inside the _managerLock$ observable
      * @param {string} componentId
