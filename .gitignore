@@ -59,5 +59,8 @@ typings/
 
 # Release
 **/release/*
+**/index.ngsummary.json/*
+**/spec/ngc/ngfactory/*
+**/spec/ngc/output/*
 **/.idea/*
 
